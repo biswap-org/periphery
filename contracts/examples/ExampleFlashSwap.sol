@@ -1,6 +1,6 @@
 pragma solidity =0.6.6;
 
-import '../../../core_latest/contracts/interfaces/IBiswapCallee.sol';
+import '../../../core/contracts/interfaces/IBiswapCallee.sol';
 
 import '../libraries/BiswapLibrary.sol';
 import '../interfaces/V1/IBiswap1Factory.sol';

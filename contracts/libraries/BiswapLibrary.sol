@@ -1,6 +1,6 @@
 pragma solidity >=0.5.0;
 
-import '../../../core_latest/contracts/interfaces/IBiswapPair.sol';
+import '../../../core/contracts/interfaces/IBiswapPair.sol';
 
 
 import "./SafeMath.sol";
@@ -22,12 +22,11 @@ library BiswapLibrary {
                 hex'ff',
                 factory,
                 keccak256(abi.encodePacked(token0, token1)),
-                hex'397c0b24688ea25e118977d70625db2fc3ac292b48f8b8ff1eaa77716e3441e1' // init code hash
+                hex'4cbf3fd8ad5597eff426ad3a7c39cc1a967bbb2db9ad19bff7aeb234a8c6a19e' // init code hash
             ))));
     }
 
     function getSwapFee(address factory, address tokenA, address tokenB) internal view returns (uint swapFee) {
-        (address token0,) = sortTokens(tokenA, tokenB);
         swapFee = IBiswapPair(pairFor(factory, tokenA, tokenB)).swapFee();
     }
 

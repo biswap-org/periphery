@@ -1,0 +1,180 @@
+{
+	"compiler": {
+		"version": "0.6.6+commit.6c089d02"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "previousOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnershipTransferred",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "isOwner",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "renounceOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"methods": {}
+		},
+		"userdoc": {
+			"methods": {}
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"periphery/contracts/BiswapRouter02.sol": "Ownable"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 999999
+		},
+		"remappings": []
+	},
+	"sources": {
+		"core/contracts/interfaces/IBiswapPair.sol": {
+			"keccak256": "0x82c07be6e2b92eb7901cabc54336b8bee56dc096dcc33739ee7f5234d6f4f11a",
+			"urls": [
+				"bzz-raw://76214d3a9f52464b2713caedd970c5441ef978e9838d5b4cb884ff4c26cc1b74",
+				"dweb:/ipfs/Qmaq2HCn744XMWvPC96nFwdNEuDCrfLkJLx9ccsHMSftmy"
+			]
+		},
+		"periphery/contracts/BiswapRouter02.sol": {
+			"keccak256": "0x24feb926edc2e0892560187728ef5fcfab40dc159c113c48b28648a3e0e7cdf0",
+			"urls": [
+				"bzz-raw://f5ae455372668232cabf5117d782c501feb62152c1d65a6ac83c33c6be988d10",
+				"dweb:/ipfs/QmWcPA518AX4jaRgFjXAiancbfqm5zYC61XdcmhLnAiQmQ"
+			]
+		},
+		"periphery/contracts/interfaces/IBiswapRouter02.sol": {
+			"keccak256": "0xe01ad0913ee549379ad9ceeb518b3326fe4e0181059d1a57dd72dde4aeeb5eac",
+			"urls": [
+				"bzz-raw://828c63bdec663942a7ae49d5540cc46c6d22f904877818d13a125819bab66a72",
+				"dweb:/ipfs/QmdFxyjajh4gjfpgmkkJd9urzkxDGxHjgBuuzLBX87oBkX"
+			]
+		},
+		"periphery/contracts/interfaces/IERC20.sol": {
+			"keccak256": "0xa791b279660ee5eb66ebd4f23b539055d178ae24677f3a164567441ecfdcf73a",
+			"urls": [
+				"bzz-raw://06f36f585a8b82eb388ccccc4e8c483718a99a07f5f12d3217afc254ab139a68",
+				"dweb:/ipfs/Qmedr3aAH6F3ZTgZJ3enoP92ZD8yNwiCStwtGknNXhiK8v"
+			]
+		},
+		"periphery/contracts/interfaces/IWETH.sol": {
+			"keccak256": "0x25ed8b4dd0b9382d61501d7fe6f30ea65e6800907ba4a5a0f280e79c80bdfd86",
+			"urls": [
+				"bzz-raw://72c047f1ad25724c269cfb87f9291558a2723d90ef8b25224caf84e04123a52f",
+				"dweb:/ipfs/QmXjW9nmRTasWKYGMnQRBGRHJg2AbT6Z4azWowuST1bLu3"
+			]
+		},
+		"periphery/contracts/libraries/Babylonian.sol": {
+			"keccak256": "0xeb1c2a281a00f4660775f75ccfa1e51fbe1d75f86aeb9d0d297151ecdb900177",
+			"urls": [
+				"bzz-raw://68515f0265381bddfb1d1356ea10ce4e5784276fc09f197fcdcedfa5c75cc069",
+				"dweb:/ipfs/QmXWVVPnuJwRUAu3Qpu1s7Fyc5WPQxmZPczVEe5cJ5wVHZ"
+			]
+		},
+		"periphery/contracts/libraries/BiswapLibrary.sol": {
+			"keccak256": "0xdf1bcc600bead09f3ec291a0265c5162fb6c5775c51e21ff5bf78af25126ee4c",
+			"urls": [
+				"bzz-raw://8c55f661d709af750d600ba55d1fcefacd2a38bb03c7e6e79b02ef9d8e5f8a4f",
+				"dweb:/ipfs/QmezK7GBp5F8rB6TmwxYLaGUfbPUsFmhcX24Q2qzFC3Efq"
+			]
+		},
+		"periphery/contracts/libraries/FullMath.sol": {
+			"keccak256": "0xc4ffcf28169f73fc9fdd1f82345d6d4fcccf3fd5aea83c133437c25e4e0950a9",
+			"urls": [
+				"bzz-raw://c9257a47501005f0a648bc4801ef4abc33843681aaf03a6d0c43d46b69e37407",
+				"dweb:/ipfs/QmciHvDrqhxs5fjsrm9aNq29FZXpunMn17n2wWj83Zsh3B"
+			]
+		},
+		"periphery/contracts/libraries/SafeMath.sol": {
+			"keccak256": "0x977f38b601109ee7a0c1b70a32e08b7aecf5b4672bdea39fa6b7fec810943b80",
+			"urls": [
+				"bzz-raw://50296b94e299cd690f4a7966a93ac6ac58128080b0a14fdb1c2e07d71b50930c",
+				"dweb:/ipfs/QmSCqtcNbmcXUekQk2NYGDQcWt34sASe6ru1v2FLBX9coc"
+			]
+		},
+		"periphery/contracts/libraries/TransferHelper.sol": {
+			"keccak256": "0xaff99b54915f57e2a4e71b8d15afd4ee425410e5a6f45c07517ae1beb806f8bd",
+			"urls": [
+				"bzz-raw://15432ec031f4cfa6709921289e198b030a0c5eac75b5a3e0eb64827a2b3b5595",
+				"dweb:/ipfs/QmZvR1KuuDvuzXFiADCngTKyMCTy31uhq9U6CazP59B55j"
+			]
+		}
+	},
+	"version": 1
+}

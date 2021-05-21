@@ -1,6 +1,9 @@
 pragma solidity =0.6.6;
 
-import '../../core_latest/contracts/interfaces/IBiswapFactory.sol';
+interface IBiswapFactory {
+    function getPair(address tokenA, address tokenB) external view returns (address pair);
+    function createPair(address tokenA, address tokenB) external returns (address pair);
+}
 import './libraries/TransferHelper.sol';
 
 import './interfaces/IBiswapRouter02.sol';
@@ -11,11 +14,56 @@ import './interfaces/IWETH.sol';
 import './libraries/Babylonian.sol';
 import './libraries/FullMath.sol';
 
-contract BiswapRouter02 is IBiswapRouter02 {
+contract Ownable {
+    address private _owner;
+
+    constructor () internal {
+        _owner = msg.sender;
+        emit OwnershipTransferred(address(0), _owner);
+    }
+
+    function owner() public view returns (address) {
+        return _owner;
+    }
+
+    function isOwner(address account) public view returns (bool) {
+        return account == _owner;
+    }
+
+    function renounceOwnership() public onlyOwner {
+        emit OwnershipTransferred(_owner, address(0));
+        _owner = address(0);
+    }
+
+    function _transferOwnership(address newOwner) internal {
+        require(newOwner != address(0), "Ownable: new owner is the zero address");
+        emit OwnershipTransferred(_owner, newOwner);
+        _owner = newOwner;
+    }
+
+    function transferOwnership(address newOwner) public onlyOwner {
+        _transferOwnership(newOwner);
+    }
+
+
+    modifier onlyOwner() {
+        require(isOwner(msg.sender), "Ownable: caller is not the owner");
+        _;
+    }
+
+    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
+}
+
+interface ISwapFeeReward {
+    function swap(address account, address input, address output, uint256 amount) external returns (bool);
+}
+
+contract BiswapRouter02 is IBiswapRouter02, Ownable {
     using SafeMath for uint;
 
     address public immutable override factory;
     address public immutable override WETH;
+    address public override swapFeeReward;
 
     modifier ensure(uint deadline) {
         require(deadline >= block.timestamp, 'BiswapV2Router: EXPIRED');
@@ -29,6 +77,10 @@ contract BiswapRouter02 is IBiswapRouter02 {
 
     receive() external payable {
         assert(msg.sender == WETH); // only accept ETH via fallback from the WETH contract
+    }
+
+    function setSwapFeeReward(address _swapFeeReward) public onlyOwner {
+        swapFeeReward = _swapFeeReward;
     }
 
     // **** ADD LIQUIDITY ****
@@ -217,6 +269,9 @@ contract BiswapRouter02 is IBiswapRouter02 {
             (address token0,) = BiswapLibrary.sortTokens(input, output);
             uint amountOut = amounts[i + 1];
             (uint amount0Out, uint amount1Out) = input == token0 ? (uint(0), amountOut) : (amountOut, uint(0));
+            if (swapFeeReward != address(0)) {
+                ISwapFeeReward(swapFeeReward).swap(msg.sender, input, output, amountOut);
+            }
             address to = i < path.length - 2 ? BiswapLibrary.pairFor(factory, output, path[i + 2]) : _to;
             IBiswapPair(BiswapLibrary.pairFor(factory, input, output)).swap(
                 amount0Out, amount1Out, to, new bytes(0)
@@ -332,6 +387,9 @@ contract BiswapRouter02 is IBiswapRouter02 {
             (uint reserveInput, uint reserveOutput) = input == token0 ? (reserve0, reserve1) : (reserve1, reserve0);
             amountInput = IERC20(input).balanceOf(address(pair)).sub(reserveInput);
             amountOutput = BiswapLibrary.getAmountOut(amountInput, reserveInput, reserveOutput, pair.swapFee());
+            }
+            if (swapFeeReward != address(0)) {
+                ISwapFeeReward(swapFeeReward).swap(msg.sender, input, output, amountOutput);
             }
             (uint amount0Out, uint amount1Out) = input == token0 ? (uint(0), amountOutput) : (amountOutput, uint(0));
             address to = i < path.length - 2 ? BiswapLibrary.pairFor(factory, output, path[i + 2]) : _to;

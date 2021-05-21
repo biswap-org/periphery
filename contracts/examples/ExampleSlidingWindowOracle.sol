@@ -1,7 +1,7 @@
 pragma solidity =0.6.6;
 
-import '../../../core_latest/contracts/interfaces/IBiswapFactory.sol';
-import '../../../core_latest/contracts/interfaces/IBiswapPair.sol';
+import '../../../core/contracts/interfaces/IBiswapFactory.sol';
+import '../../../core/contracts/interfaces/IBiswapPair.sol';
 import '../libraries/FixedPoint.sol';
 
 import '../libraries/SafeMath.sol';
