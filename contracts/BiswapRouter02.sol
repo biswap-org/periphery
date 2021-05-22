@@ -5,7 +5,6 @@ interface IBiswapFactory {
     function createPair(address tokenA, address tokenB) external returns (address pair);
 }
 import './libraries/TransferHelper.sol';
-
 import './interfaces/IBiswapRouter02.sol';
 import './libraries/BiswapLibrary.sol';
 import './libraries/SafeMath.sol';
@@ -462,10 +461,6 @@ contract BiswapRouter02 is IBiswapRouter02, Ownable {
     // **** LIBRARY FUNCTIONS ****
     function quote(uint amountA, uint reserveA, uint reserveB) public pure virtual override returns (uint amountB) {
         return BiswapLibrary.quote(amountA, reserveA, reserveB);
-    }
-
-    function sqrt(uint256 n) public pure returns (uint256 number){
-        number = Babylonian.sqrt(n);
     }
 
     function getAmountOut(uint amountIn, uint reserveIn, uint reserveOut, uint swapFee)
